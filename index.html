@@ -15,8 +15,8 @@
 		<div id="pesan" style="border:1px solid #ccc; width:100%;"></div>
 	</center>
 
-	<script src="./jquery-1.10.1.min.js"></script>
-	<script src="./socket.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io.connect('http://localhost:8080');
 
@@ -28,13 +28,14 @@
 
 		// A dialog box is displayed when the server sends us a "message"
 		socket.on('message', function(message){
-			$('#pesan').append('<hr>'+message+"<hr>");
+			$('#pesan').append('<hr>'+message+'<hr>');
 		})
 
 		// When the button is clicked, a "message" is sent to server
 		$('#msg').click(function(){
+			
 			$('#pesan').append('<br>'+$('#content_msg').val());
-			socket.emit('message', $('#content_msg').val());
+			socket.emit('message', '<hr><b>'+username+': </b>'+$('#content_msg').val());
 		})
 	</script>
 </body>
